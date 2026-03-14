@@ -505,6 +505,11 @@ export async function onRequest(context) {
     html = html.replace(/Factory[- ]?Trained/gi, 'Trained');
     html = html.replace(/factory certified/gi, 'certified');
     html = html.replace(/factory trained/gi, 'trained');
+    html = html.replace(/factory training/gi, 'professional training');
+    html = html.replace(/Factory Expert/gi, 'Professional');
+    html = html.replace(/Factory Certification/gi, 'Professional Certification');
+    html = html.replace(/factory certification/gi, 'professional certification');
+    html = html.replace(/With factory certification/gi, 'With professional certification');
   }
 
   return new Response(html, {
