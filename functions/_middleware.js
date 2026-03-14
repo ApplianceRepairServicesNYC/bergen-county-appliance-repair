@@ -501,15 +501,27 @@ export async function onRequest(context) {
   // Remove authorized and factory claims for Bertazzoni and Gaggenau
   if (subdomain === 'bertazzoni' || subdomain === 'gaggenau') {
     html = html.replace(/Authorized/gi, 'Expert');
-    html = html.replace(/Factory[- ]?Certified/gi, 'Certified');
+    html = html.replace(/Factory[- ]?Certified/gi, 'Yearly Training');
     html = html.replace(/Factory[- ]?Trained/gi, 'Trained');
-    html = html.replace(/factory certified/gi, 'certified');
+    html = html.replace(/factory certified/gi, 'yearly training');
     html = html.replace(/factory trained/gi, 'trained');
-    html = html.replace(/factory training/gi, 'professional training');
+    html = html.replace(/factory training/gi, 'yearly training');
     html = html.replace(/Factory Expert/gi, 'Professional');
-    html = html.replace(/Factory Certification/gi, 'Professional Certification');
-    html = html.replace(/factory certification/gi, 'professional certification');
-    html = html.replace(/With factory certification/gi, 'With professional certification');
+    html = html.replace(/Factory Certification/gi, 'Yearly Training');
+    html = html.replace(/factory certification/gi, 'yearly training');
+    html = html.replace(/With factory certification/gi, 'With yearly training');
+    html = html.replace(/Certified Technicians/gi, 'Expert Technicians');
+    html = html.replace(/certified technicians/gi, 'expert technicians');
+    html = html.replace(/Certified/g, 'Trained');
+    html = html.replace(/certified/g, 'trained');
+    // Replace the certification explanation content
+    html = html.replace(
+      /<h3>What is Professional Certification\?<\/h3>[\s\S]*?<p>With professional certification, our team is qualified to service/,
+      `<h3>What is Yearly Training?</h3>
+            <p>Our technicians participate in ongoing yearly training programs to stay current with the latest appliance repair techniques and technologies. This continuous education ensures our team maintains expertise in general appliance repair, diagnostics, and service procedures across all major appliance types.</p>
+            <p>Through yearly training, our technicians develop hands-on experience with a wide range of appliances, learning the latest troubleshooting methods and repair techniques. This commitment to ongoing education means our team brings current knowledge and proven expertise to every service call.</p>
+            <p>With yearly training, our team is qualified to service`
+    );
   }
 
   return new Response(html, {
