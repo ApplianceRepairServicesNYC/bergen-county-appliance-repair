@@ -516,12 +516,17 @@ export async function onRequest(context) {
     html = html.replace(/certified/g, 'trained');
     // Replace the certification explanation content
     html = html.replace(
-      /<h3>What is Professional Certification\?<\/h3>[\s\S]*?<p>With professional certification, our team is qualified to service/,
+      /<h3>What is Professional Certification\?<\/h3>[\s\S]*?<p>With professional certification, our team is qualified to service[^<]*<\/p>/,
       `<h3>What is Yearly Training?</h3>
             <p>Our technicians participate in ongoing yearly training programs to stay current with the latest appliance repair techniques and technologies. This continuous education ensures our team maintains expertise in general appliance repair, diagnostics, and service procedures across all major appliance types.</p>
             <p>Through yearly training, our technicians develop hands-on experience with a wide range of appliances, learning the latest troubleshooting methods and repair techniques. This commitment to ongoing education means our team brings current knowledge and proven expertise to every service call.</p>
-            <p>With yearly training, our team is qualified to service`
+            <p>With yearly training, our team is qualified to service all major appliance brands and models.</p>`
     );
+    // Remove brand-specific "qualified to service all X" text
+    html = html.replace(/qualified to service all Bertazzoni/gi, 'qualified to service all');
+    html = html.replace(/qualified to service all Gaggenau/gi, 'qualified to service all');
+    html = html.replace(/service any Bertazzoni appliance/gi, 'service any appliance');
+    html = html.replace(/service any Gaggenau appliance/gi, 'service any appliance');
   }
 
   return new Response(html, {
