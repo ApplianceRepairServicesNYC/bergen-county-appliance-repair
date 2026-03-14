@@ -254,6 +254,24 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const hostname = url.hostname;
 
+  // Add noindex for pages.dev domains
+  if (hostname.includes('pages.dev')) {
+    const response = await next();
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('text/html')) {
+      let html = await response.text();
+      html = html.replace(
+        /<meta name="robots" content="index, follow">/,
+        '<meta name="robots" content="noindex, nofollow">'
+      );
+      return new Response(html, {
+        status: response.status,
+        headers: response.headers
+      });
+    }
+    return response;
+  }
+
   // Extract subdomain
   const subdomain = hostname.split('.')[0];
 
