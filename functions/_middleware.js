@@ -522,21 +522,19 @@ export async function onRequest(context) {
             <p>Through yearly training, our technicians develop hands-on experience with a wide range of appliances, learning the latest troubleshooting methods and repair techniques. This commitment to ongoing education means our team brings current knowledge and proven expertise to every service call.</p>
             <p>With yearly training, our team is qualified to service all major appliance brands and models.</p>`
     );
-    // Remove brand-specific text and make it general
-    html = html.replace(/qualified to service all Bertazzoni/gi, 'qualified to service all');
-    html = html.replace(/qualified to service all Gaggenau/gi, 'qualified to service all');
-    html = html.replace(/service any Bertazzoni appliance/gi, 'service any appliance');
-    html = html.replace(/service any Gaggenau appliance/gi, 'service any appliance');
-    html = html.replace(/service all Bertazzoni appliances/gi, 'service all major appliance brands');
-    html = html.replace(/service all Gaggenau appliances/gi, 'service all major appliance brands');
-    html = html.replace(/on all Bertazzoni appliance categories/gi, 'on all appliance categories');
-    html = html.replace(/on all Gaggenau appliance categories/gi, 'on all appliance categories');
-    html = html.replace(/understanding Bertazzoni's sophisticated engineering/gi, 'understanding sophisticated appliance engineering');
-    html = html.replace(/understanding Gaggenau's sophisticated engineering/gi, 'understanding sophisticated appliance engineering');
-    html = html.replace(/At Bertazzoni Appliance Repair of Bergen County/gi, 'At our Bergen County appliance repair service');
-    html = html.replace(/At Gaggenau Appliance Repair of Bergen County/gi, 'At our Bergen County appliance repair service');
+    // Make training content general but keep brand identity
     html = html.replace(/Trained and trained to/gi, 'trained to');
-    html = html.replace(/This certification represents/gi, 'This training represents');
+    html = html.replace(/This certification represents/gi, 'Our yearly training represents');
+
+    // Replace the Professional Service section entirely
+    html = html.replace(
+      /<p><strong>Professional Service<\/strong><\/p>[\s\S]*?<h3>What is Yearly Training\?<\/h3>[\s\S]*?genuine replacement parts\.<\/p>/,
+      `<p><strong>Professional Service</strong></p>
+            <p>At ${brand.name} Appliance Repair of Bergen County, our technicians are experts in all ${brand.name} appliances. Our team receives yearly training on general appliance repair techniques, diagnostics, and service procedures to ensure we deliver the highest standard of repair service.</p>
+
+            <h3>What is Yearly Training?</h3>
+            <p>Our technicians participate in yearly training programs covering general appliance repair, advanced diagnostics, and the latest service techniques. This ongoing education ensures our team stays current with evolving appliance technology and repair methods, bringing expert knowledge to every ${brand.name} service call.</p>`
+    );
   }
 
   return new Response(html, {
