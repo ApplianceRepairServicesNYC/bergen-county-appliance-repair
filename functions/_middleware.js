@@ -498,6 +498,15 @@ export async function onRequest(context) {
   html = html.replace(/dryers require specialized knowledge/gi, `${brand.name} dryers require specialized knowledge`);
   html = html.replace(/require understanding of electrical systems/gi, `${brand.name} repairs require understanding of electrical systems`);
 
+  // Remove authorized and factory claims for Bertazzoni and Gaggenau
+  if (subdomain === 'bertazzoni' || subdomain === 'gaggenau') {
+    html = html.replace(/Authorized/gi, 'Expert');
+    html = html.replace(/Factory[- ]?Certified/gi, 'Certified');
+    html = html.replace(/Factory[- ]?Trained/gi, 'Trained');
+    html = html.replace(/factory certified/gi, 'certified');
+    html = html.replace(/factory trained/gi, 'trained');
+  }
+
   return new Response(html, {
     status: response.status,
     headers: response.headers
