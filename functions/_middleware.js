@@ -396,7 +396,7 @@ export async function onRequest(context) {
 
   // Replace services section heading with brand name
   html = html.replace(
-    /Expert Repair for All appliance Appliances/g,
+    /Expert Repair for All Appliances/g,
     `Expert Repair for All ${brand.name} Appliances`
   );
 
@@ -501,14 +501,14 @@ export async function onRequest(context) {
   html = html.replace(/any appliance regardless/gi, `any ${brand.name} appliance regardless`);
   html = html.replace(/appliance engineering/gi, `${brand.name} engineering`);
   html = html.replace(/understanding the sophisticated engineering/gi, `understanding ${brand.name}'s sophisticated engineering`);
-  html = html.replace(/Oven Models We Service/g, `${brand.name} Oven Models We Service`);
-  html = html.replace(/Cooktop Models We Service/g, `${brand.name} Cooktop Models We Service`);
-  html = html.replace(/Microwave Models We Service/g, `${brand.name} Microwave Models We Service`);
-  html = html.replace(/Refrigerator Models We Service/g, `${brand.name} Refrigerator Models We Service`);
-  html = html.replace(/Dryer Models We Service/g, `${brand.name} Dryer Models We Service`);
-  html = html.replace(/Washer Models We Service/g, `${brand.name} Washer Models We Service`);
-  html = html.replace(/Dishwasher Models We Service/g, `${brand.name} Dishwasher Models We Service`);
-  html = html.replace(/Hood Vent Models We Service/g, `${brand.name} Hood Vent Models We Service`);
+  html = html.replace(/Oven Types We Service/g, `${brand.name} Oven Types We Service`);
+  html = html.replace(/Cooktop Types We Service/g, `${brand.name} Cooktop Types We Service`);
+  html = html.replace(/Microwave Types We Service/g, `${brand.name} Microwave Types We Service`);
+  html = html.replace(/Refrigerator Types We Service/g, `${brand.name} Refrigerator Types We Service`);
+  html = html.replace(/Dryer Types We Service/g, `${brand.name} Dryer Types We Service`);
+  html = html.replace(/Washer Types We Service/g, `${brand.name} Washer Types We Service`);
+  html = html.replace(/Dishwasher Types We Service/g, `${brand.name} Dishwasher Types We Service`);
+  html = html.replace(/Hood Vent Types We Service/g, `${brand.name} Hood Vent Types We Service`);
   html = html.replace(/qualified to service all major brands/gi, `qualified to service all ${brand.name} models`);
   html = html.replace(/We service all dryer models/gi, `We service all ${brand.name} dryer models`);
   html = html.replace(/We service all washer models/gi, `We service all ${brand.name} washer models`);
@@ -519,15 +519,16 @@ export async function onRequest(context) {
   // Remove authorized and factory claims for Bertazzoni and Gaggenau
   if (subdomain === 'bertazzoni' || subdomain === 'gaggenau') {
     html = html.replace(/Authorized/gi, 'Expert');
-    html = html.replace(/Factory[- ]?Certified/gi, 'Yearly Training');
-    html = html.replace(/Factory[- ]?Trained/gi, 'Trained');
-    html = html.replace(/factory certified/gi, 'yearly training');
-    html = html.replace(/factory trained/gi, 'trained');
-    html = html.replace(/factory training/gi, 'yearly training');
+    html = html.replace(/Factory[- ]?Certified Technicians/gi, 'Professionally Trained Technicians');
+    html = html.replace(/Factory[- ]?Certified/gi, 'Professionally Trained');
+    html = html.replace(/Factory[- ]?Trained/gi, 'Professionally Trained');
+    html = html.replace(/factory certified/gi, 'professionally trained');
+    html = html.replace(/factory trained/gi, 'professionally trained');
+    html = html.replace(/factory training/gi, 'professional training');
     html = html.replace(/Factory Expert/gi, 'Professional');
-    html = html.replace(/Factory Certification/gi, 'Yearly Training');
-    html = html.replace(/factory certification/gi, 'yearly training');
-    html = html.replace(/With factory certification/gi, 'With yearly training');
+    html = html.replace(/Factory Certification/gi, 'Professional Training');
+    html = html.replace(/factory certification/gi, 'professional training');
+    html = html.replace(/With factory certification/gi, 'With professional training');
     html = html.replace(/Certified Technicians/gi, 'Expert Technicians');
     html = html.replace(/certified technicians/gi, 'expert technicians');
     html = html.replace(/Certified/g, 'Trained');
@@ -535,25 +536,31 @@ export async function onRequest(context) {
     // Replace the certification explanation content
     html = html.replace(
       /<h3>What is Professional Certification\?<\/h3>[\s\S]*?<p>With professional certification, our team is qualified to service[^<]*<\/p>/,
-      `<h3>What is Yearly Training?</h3>
-            <p>Our technicians participate in ongoing yearly training programs to stay current with the latest appliance repair techniques and technologies. This continuous education ensures our team maintains expertise in general appliance repair, diagnostics, and service procedures across all major appliance types.</p>
-            <p>Through yearly training, our technicians develop hands-on experience with a wide range of appliances, learning the latest troubleshooting methods and repair techniques. This commitment to ongoing education means our team brings current knowledge and proven expertise to every service call.</p>
-            <p>With yearly training, our team is qualified to service all major appliance brands and models.</p>`
+      `<h3>Our Professional Training</h3>
+            <p>Our technicians participate in ongoing training programs to stay current with the latest appliance repair techniques and technologies. This continuous education ensures our team maintains expertise in general appliance repair, diagnostics, and service procedures across all major appliance types.</p>
+            <p>Through professional training, our technicians develop hands-on experience with a wide range of appliances, learning the latest troubleshooting methods and repair techniques. This commitment to ongoing education means our team brings current knowledge and proven expertise to every service call.</p>
+            <p>With professional training, our team is qualified to service all major appliance brands and models.</p>`
     );
     // Make training content general but keep brand identity
     html = html.replace(/Trained and trained to/gi, 'trained to');
-    html = html.replace(/This certification represents/gi, 'Our yearly training represents');
+    html = html.replace(/This certification represents/gi, 'Our professional training represents');
 
     // Replace the Professional Service section entirely
     html = html.replace(
       /<p><strong>Professional Service<\/strong><\/p>[\s\S]*?<h3>What is Yearly Training\?<\/h3>[\s\S]*?genuine replacement parts\.<\/p>/,
       `<p><strong>Professional Service</strong></p>
-            <p>At ${brand.name} Appliance Repair of Bergen County, our technicians are experts in all ${brand.name} appliances. Our team receives yearly training on general appliance repair techniques, diagnostics, and service procedures to ensure we deliver the highest standard of repair service.</p>
+            <p>At ${brand.name} Appliance Repair of Bergen County, our technicians are experts in all ${brand.name} appliances. Our team receives ongoing training on general appliance repair techniques, diagnostics, and service procedures to ensure we deliver the highest standard of repair service.</p>
 
-            <h3>What is Yearly Training?</h3>
-            <p>Our technicians participate in yearly training programs covering general appliance repair, advanced diagnostics, and the latest service techniques. This ongoing education ensures our team stays current with evolving appliance technology and repair methods, bringing expert knowledge to every ${brand.name} service call.</p>`
+            <h3>Our Professional Training</h3>
+            <p>Our technicians participate in training programs covering general appliance repair, advanced diagnostics, and the latest service techniques. This ongoing education ensures our team stays current with evolving appliance technology and repair methods, bringing expert knowledge to every ${brand.name} service call.</p>`
     );
   }
+
+  // Update copyright to include brand name
+  html = html.replace(
+    /© 2025 Bergen County Appliance Repair\. All Rights Reserved\./g,
+    `© 2025 ${brand.name} Appliance Repair Service of Bergen County. All Rights Reserved.`
+  );
 
   return new Response(html, {
     status: response.status,
